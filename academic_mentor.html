@@ -1,0 +1,126 @@
+{
+  "platform": {
+    "name": "AcademicMentor",
+    "roles": ["admin", "tutor", "student"],
+    "languages": ["hebrew"],
+    "currency": "ILS"
+  },
+  "features": {
+    "user_management": {
+      "tutor": {
+        "registration_fields": [
+          "first_name",
+          "email",
+          "password",
+          "subject_expertise",
+          "hourly_rate",
+          "available_hours",
+          "bio",
+          "grow_account_onboarding"  // <--- שינוי עיקרי כאן
+        ],
+        "grow_integration": {
+          "auto_redirect_to_grow_onboarding": true,
+          "status_field": "grow_onboarding_status",  // values: 'pending', 'completed', 'failed'
+          "require_grow_completion_to_activate_profile": true
+        },
+        "can_receive_split_payments": true,
+        "can_upload_files": true
+      },
+      "student": {
+        "can_book_sessions": true,
+        "can_purchase_packages": true,
+        "can_use_coupons": true,
+        "can_rate_sessions": true
+      },
+      "admin": {
+        "can_define_commission_default": true,
+        "can_override_commission_per_tutor": true,
+        "can_create_coupons": true,
+        "can_create_session_packages": true,
+        "can_view_reports": true
+      }
+    },
+    "privacy_rules": {
+      "show_first_name_only": true,
+      "hide_email_and_phone": true,
+      "disable_link_sharing_in_chat": true,
+      "enable_chat_content_filter": true
+    },
+    "scheduling": {
+      "calendar_integration": "google_calendar",
+      "video_platform": "google_meet",
+      "session_duration_options": [30, 45, 60],
+      "buffer_time_minutes": 5
+    },
+    "session_behavior": {
+      "start_tracking_on_join": true,
+      "record_actual_duration": true,
+      "overage_handling": {
+        "grace_minutes": 5,
+        "bill_after_minutes": 10,
+        "rate_per_minute": "from_tutor_settings"
+      },
+      "early_termination_policy": {
+        "refund_threshold_minutes": 50,
+        "enable_partial_refund": true
+      }
+    },
+    "payment": {
+      "provider": "grow",
+      "split_payments": true,
+      "commission": {
+        "default_percent": 10,
+        "per_tutor_override": true
+      },
+      "tutor_payouts": {
+        "requires_completed_grow_account": true,
+        "payouts_go_directly_to_tutor": true
+      },
+      "receipt_handling": {
+        "tutor_must_issue_receipt": true,
+        "platform_issues_receipt_only_on_commission": true,
+        "student_receives_summary_email": true
+      }
+    },
+    "chat": {
+      "internal_chat_enabled": true,
+      "file_uploads_enabled": true,
+      "allowed_file_types": ["pdf", "docx", "txt", "pptx", "xlsx", "jpg", "png"],
+      "max_file_size_mb": 15,
+      "content_filtering_enabled": true
+    },
+    "notifications": {
+      "email_reminders": ["24h", "1h"],
+      "email_templates": [
+        "session_confirmation",
+        "session_reminder",
+        "session_cancellation",
+        "payment_receipt",
+        "rating_request"
+      ],
+      "sender_identity": {
+        "from_name": "AcademicMentor",
+        "from_email": "noreply@academicmentor.com"
+      }
+    },
+    "extras": {
+      "reviews_and_ratings": {
+        "enabled": true,
+        "scale": 5,
+        "text_optional": true,
+        "admin_can_hide": true
+      },
+      "session_packages": {
+        "enabled": true,
+        "package_sizes": [3, 5, 10],
+        "discount_per_package": true,
+        "tracked_usage": true
+      },
+      "coupons": {
+        "enabled": true,
+        "types": ["fixed", "percentage"],
+        "restrictions": ["new_users_only", "specific_tutor", "expiration_date"]
+      }
+    }
+  }
+}
